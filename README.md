@@ -36,7 +36,7 @@ CREATE KEYSPACE oauth WITH REPLICATION = {'class':'SimpleStrategy','replication_
 describe keyspaces;
 USE oauth;
 CREATE TABLE access_token(access_token varchar PRIMARY KEY, user_id bigint, client_id bigint, expires bigint);
-SELECT * FROM access_token where access_token="example";
+SELECT * FROM access_token where access_token='example';
 ```
 
 ### Troubleshoot & useful commands
