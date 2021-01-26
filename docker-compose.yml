@@ -11,6 +11,7 @@ services:
     env_file:
       - .env
     container_name: go-oauth-api
+    restart: always
     tty: true
     build:
       context: ./

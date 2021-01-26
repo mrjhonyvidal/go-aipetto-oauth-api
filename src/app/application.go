@@ -1,7 +1,6 @@
 package app
 
 import (
-	"github.com/aipetto/go-aipetto-oauth-api/src/clients/cassandra"
 	"github.com/aipetto/go-aipetto-oauth-api/src/domain/access_token"
 	"github.com/aipetto/go-aipetto-oauth-api/src/http"
 	"github.com/aipetto/go-aipetto-oauth-api/src/repository/db"
@@ -13,8 +12,6 @@ var (
 )
 
 func StartApplication() {
-	cassandra.CheckConnectionOnStartApplication()
-
 	atHandler := http.NewHandler(access_token.NewService(db.NewRepository()))
 
 	router.GET("/oauth/access_token/:access_token_id", atHandler.GetById)
