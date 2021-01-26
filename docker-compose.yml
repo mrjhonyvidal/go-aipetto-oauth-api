@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  oauth-cassandra-db:
+    restart: always
+    container_name: go-oauth-cassandra-db
+    image: cassandra
+    volumes:
+      - ./cassandra_data:/var/lib/cassandra
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  go-oauth-service:
+    env_file:
+      - .env
+    container_name: go-oauth-api
+    tty: true
+    build:
+      context: ./
+    volumes:
+      - ./:/go
+    ports:
+      - "8082:8082"
+    depends_on:
+      - "oauth-cassandra-db"
+volumes:
+  cassandra_data:
+    driver: local
