@@ -12,7 +12,7 @@ type RestUsersRepository interface{
 	LoginUser(string, string) (*users.User, *errors.RestErr)
 }
 
-func NewRepository() RestUsersRepository {
+func NewRestUserRepository() RestUsersRepository {
 	return &restUsersRepository{}
 }
 

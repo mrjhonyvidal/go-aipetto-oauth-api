@@ -1,6 +1,28 @@
 ## AIPetto OAuth
 Service responsible for handling OAuthentication.
 
+User API
+```
+{
+    "email": "email@email.com",
+    "password": "123abc"
+}
+
+OAuth API:
+{
+    "grant_type": "password",
+    "username": "email@email.com",
+    "password": "123abc"
+}
+
+{
+    "grant_type": "client_credentials",
+    "client_id": "id-123",
+    "client_secret": "secret-123"
+}
+
+```
+
 ### Run using Docker and docker-compose
 ```
 sudo docker-compose up --build
@@ -38,6 +60,7 @@ USE oauth;
 CREATE TABLE access_token(access_token varchar PRIMARY KEY, user_id bigint, client_id bigint, expires bigint);
 SELECT * FROM access_token where access_token='example';
 ```
+
 
 ### Troubleshoot & useful commands
 ```
