@@ -4,7 +4,7 @@ import (
 	"github.com/aipetto/go-aipetto-oauth-api/src/http"
 	"github.com/aipetto/go-aipetto-oauth-api/src/repository/db"
 	"github.com/aipetto/go-aipetto-oauth-api/src/repository/rest"
-	access_token2 "github.com/aipetto/go-aipetto-oauth-api/src/services/access_token"
+	oauth_access_token "github.com/aipetto/go-aipetto-oauth-api/src/services/access_token"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +13,7 @@ var (
 )
 
 func StartApplication() {
-	atHandler := http.NewAccessTokenHandler(access_token2.NewService(db.NewRepository(), rest.NewRestUserRepository()))
+	atHandler := http.NewAccessTokenHandler(oauth_access_token.NewService(db.NewRepository(), rest.NewRestUserRepository()))
 
 	router.GET("/oauth/access_token/:access_token_id", atHandler.GetById)
 	router.POST("/oauth/access_token", atHandler.Create)
