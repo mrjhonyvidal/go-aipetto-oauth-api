@@ -70,3 +70,10 @@ The go mod tidy command cleans up these unused dependencies:
 go mod init github.com/aipetto/go-aipetto-users-api
 go clean -modcache
 ```
+
+## TODO
+-[ ] Check Cassandra settings, message on local logs:
+```
+go-oauth-cassandra-db | WARN  [main] 2021-01-31 02:54:59,864 StartupChecks.java:311 - Maximum number of memory map areas per process (vm.max_map_count) 65530 is too low, recommended value: 1048575, you can change it with sysctl.
+go-oauth-api exited with code 2
+```

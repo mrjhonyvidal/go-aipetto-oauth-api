@@ -3,7 +3,7 @@ package access_token
 import (
 	"fmt"
 	"github.com/aipetto/go-aipetto-oauth-api/src/utils/crypto"
-	"github.com/aipetto/go-aipetto-oauth-api/src/utils/errors"
+	"github.com/aipetto/go-aipetto-utils/src/rest_errors"
 	"strings"
 	"time"
 )
@@ -27,14 +27,14 @@ type AccessTokenRequest struct {
 	ClientSecret	string	`json:"client_secret"`
 }
 
-func (at *AccessTokenRequest) ValidateAccessToken() *errors.RestErr{
+func (at *AccessTokenRequest) ValidateAccessToken() *rest_errors.RestErr{
 	switch at.GrantType{
 	case grantTypePassword:
 		break
 	case grantTypeClientCredentials:
 		break
 	default:
-		return errors.NewBadRequestError("invalid grant_type parameter")
+		return rest_errors.NewBadRequestError("invalid grant_type parameter")
 	}
 
 	// Validate parameters for each grant_type
@@ -48,19 +48,19 @@ type AccessToken struct {
 	Expires		int64	`json:expires`
 }
 
-func (at *AccessToken) Validate() *errors.RestErr{
+func (at *AccessToken) Validate() *rest_errors.RestErr{
 	at.AccessToken = strings.TrimSpace(at.AccessToken)
 	if at.AccessToken == "" {
-		return errors.NewBadRequestError("invalid access token id")
+		return rest_errors.NewBadRequestError("invalid access token id")
 	}
 	if at.UserId <= 0 {
-		return errors.NewBadRequestError("invalid user id")
+		return rest_errors.NewBadRequestError("invalid user id")
 	}
 	if at.ClientId<= 0 {
-		return errors.NewBadRequestError("client id")
+		return rest_errors.NewBadRequestError("client id")
 	}
 	if at.Expires <= 0 {
-		return errors.NewBadRequestError("invalid expiration time")
+		return rest_errors.NewBadRequestError("invalid expiration time")
 	}
 	return nil
 }

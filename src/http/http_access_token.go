@@ -3,7 +3,7 @@ package http
 import (
 	"github.com/aipetto/go-aipetto-oauth-api/src/domain/access_token"
 	access_token2 "github.com/aipetto/go-aipetto-oauth-api/src/services/access_token"
-	"github.com/aipetto/go-aipetto-oauth-api/src/utils/errors"
+	"github.com/aipetto/go-aipetto-utils/src/rest_errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -37,7 +37,7 @@ func (handler *accessTokenHandler) Create(c *gin.Context) {
 
 	// validate if our data struct is a correct valid json format
 	if err := c.ShouldBindJSON(&at); err != nil{
-		restErr := errors.NewBadRequestError("invalid json body")
+		restErr := rest_errors.NewBadRequestError("invalid json body")
 		c.JSON(restErr.Status, restErr)
 		return
 	}
